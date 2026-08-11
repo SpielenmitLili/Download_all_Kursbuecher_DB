@@ -51,16 +51,16 @@ jobs:
         run: |
           Compress-Archive `
             -Path publish\* `
-            -DestinationPath Download_all_Kursbuecher_DB_win.zip
+            -DestinationPath Download_all_Kursbuecher_DB_win-x64.zip
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Download_all_Kursbuecher_DB
-          path: Download_all_Kursbuecher_DB.zip
+          path: Download_all_Kursbuecher_DB_win-x64.zip
 
       - name: Create Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: Download_all_Kursbuecher_DB_win.zip
+          files: Download_all_Kursbuecher_DB_win-x64.zip
