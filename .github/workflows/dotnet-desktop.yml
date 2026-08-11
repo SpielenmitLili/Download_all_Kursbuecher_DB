@@ -1,8 +1,13 @@
 name: .NET Build
 
+permissions:
+  contents: write
+
 on:
   push:
     branches: [ "master" ]
+    tags:
+      - 'v*'
   pull_request:
     branches: [ "master" ]
 
@@ -47,3 +52,9 @@ jobs:
       with:
         name: Download_all_Kursbuecher_DB-${{ matrix.configuration }}
         path: publish
+        
+    - name: Create Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v2
+      with:
+        files: publish/**
